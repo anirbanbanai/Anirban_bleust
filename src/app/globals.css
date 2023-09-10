@@ -4,6 +4,7 @@
 
 
 .nn {
+  height: 100vh;
   border-radius: 30px;
   background: #fafafa;
   box-shadow: 5px 5px 19px #646464,
