@@ -15,7 +15,7 @@ const RightSideBar = () => {
             <Image alt='logo' src="/logo.svg" width={55} height={55}></Image>
                 {
                     RouteLinks.map(({route,icon, exact})=>(
-                        <NavLink activeClassName="bg-red-400 px-3 p-2 rounded-xl" href={route} exact={route ==="/"} key={route}><h1 className='text-2xl bg-blue-100 rounded-3xl p-3'>{icon}</h1></NavLink>
+                        <NavLink activeClassName="bg-red-500 px-3 p-2 rounded-xl" href={route} exact={route ==="/"} key={route}><h1 className='text-2xl bg-blue-100 rounded-3xl p-3'>{icon}</h1></NavLink>
                     ))
                 }
            
