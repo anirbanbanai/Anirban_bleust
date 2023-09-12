@@ -4,15 +4,31 @@ import Link from 'next/link';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../components/AuthContext';
+import Swal from 'sweetalert2';
+import createJWT from '../utils/createJWT';
+import { NextResponse } from 'next/server';
+import { useRouter } from 'next/navigation';
+// import createJWT from '@/utils/createJWT';
 
 const Login = () => {
+    const router = useRouter();
     const {LoginUser} = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const onSubmit = data =>{
         console.log(data);
         LoginUser(data.email, data.pass)
+        // createJWT(data.email)
         .then(data=>{
+            router.push("/")
+          
             console.log(data);
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Login sucessfull',
+                showConfirmButton: false,
+                timer: 1500
+              })
         })
     }
     return (

@@ -1,9 +1,22 @@
-import React from 'react';
+"use client"
+import axios from 'axios';
+import SubMainpage from '../components/SubMainpage';
+import { useState } from 'react';
 
 const page = () => {
+
+    const [data,setData] =useState()
+
+    axios.get("http://localhost:5000/all")
+    .then(data=>{
+        // console.log(data.data);
+        setData(data.data)
+    })
     return (
-        <div>
-            allroute
+        <div className='m-5   '>
+           {
+            data?.map(m=><SubMainpage key={m._id} main={m}></SubMainpage>)
+           }
         </div>
     );
 };

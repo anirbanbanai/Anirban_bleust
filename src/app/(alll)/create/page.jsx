@@ -1,12 +1,36 @@
 "use client"
 
-import React from 'react';
+import { AuthContext } from '@/app/components/AuthContext';
+import axios from 'axios';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Createe = () => {
+    const {user} = useContext(AuthContext)
+
     const { register, handleSubmit } = useForm();
     const onSubmit = data =>{
-        console.log(data);
+        const alldata =  {post : data?.post,email: user?.email}
+        // console.log(alldata);
+
+        axios.post("http://localhost:5000/all",alldata)
+        .then(res=>{
+            // console.log(res.data);
+            if(res.data.acknowledged === true){
+                
+                Swal.fire({
+                    position: 'top',
+                    icon: 'success',
+                    title: 'Post created successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+        })
+        .catch(error=>{
+            console.log(error.message);
+        })
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='nnn2'>
@@ -15,10 +39,8 @@ const Createe = () => {
                 
 
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Post</span>
-                    </label>
-                    <textarea {...register("post", { required: true })} className=" textarea textarea-bordered h-24" placeholder="Bio"></textarea>
+                 
+                    <textarea {...register("post", { required: true })} className=" textarea textarea-bordered h-24" placeholder="create a post"></textarea>
 
                 </div>
             </div>

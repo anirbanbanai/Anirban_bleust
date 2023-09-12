@@ -31,10 +31,10 @@
 }
 
 .nnn3 {
-  margin-top: 30px;
-  border-radius: 60px;
+  margin-top: 0px;
+  border-radius: 0px;
   background: #f7f3f3;
-  box-shadow: 5px 5px 0px #606060,
+  box-shadow: 5px 5px 0px #c7c3c3,
       -5px -5px 0px #ffffff;
 }
 

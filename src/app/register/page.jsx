@@ -1,26 +1,45 @@
 "use client"
 
 import Link from 'next/link';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../components/AuthContext';
 import Swal from 'sweetalert2';
+import createJWT from '../utils/createJWT';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+// import createJWT from '@/utils/createJWT';
 
 const Register = () => {
+    const router = useRouter();
     const [error,setError] = useState()
     const {createUser} = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const onSubmit = data =>{
         createUser(data.email, data.pass)
+        // createJWT(data.email)
         .then(data=>{
+           
             console.log(data);
-            Swal.fire({
-                position: 'top',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
-              })
+           
+        })
+
+        axios.post("http://localhost:5000/users", data)
+        .then(res=>{
+            console.log(res.data);
+            if(res.data.acknowledged === true){
+                router.push("/")
+                Swal.fire({
+                    position: 'top',
+                    icon: 'success',
+                    title: 'User created successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+        })
+        .catch(error=>{
+            console.log(error.message);
         })
        
 
