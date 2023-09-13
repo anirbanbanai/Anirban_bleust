@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const page = () => {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [data,setData] =useState()
 
     axios.get("http://localhost:5000/all")
